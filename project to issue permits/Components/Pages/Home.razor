@@ -1,56 +1,82 @@
 ﻿@page "/"
+@inject NavigationManager Navm
+@rendermode InteractiveServer
 
-<PageTitle>Home</PageTitle>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- css-fill -->
-    <link rel="stylesheet" href="/bootstrap/styleinPage-1.css">
-    <!-- normalize -->
-    <link rel="stylesheet" href="/css/normalize-fill.css">
-    <!-- google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@100;300;600&display=swap" rel="stylesheet">
-    <!-- font awesome url -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <title>خدمات طلابية</title>
-</head>
-<body>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="#">
-                <h2 class="text"><i class="fa-brands fa-accessible-icon"></i>اصدار تصريح لذوي الهمم</h2>
-                <input type="text" class="input" placeholder="الرقم الجامعي" id="user-id sick-id">
-                <input type="submit" class="button" value="ارسال" id="submit-student1">
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-            <form action="#">
-                <h2 class="text"><i class="fa-solid fa-graduation-cap"></i>اصدار تصريح طالب متفوق</h2>
-                <input type="text" class="input" placeholder="الرقم الجامعي" id="user-id">
-                <input type="text" class="input" placeholder="المعدل التراكمي" id="GPA">
-                <input class="button" type="submit" value="ارسال" id="submit-student2">
-            </form>
-        </div>
-        <div class="overlay-container" id="overlay-container">
-            <div class="overlay" id="overlay">
-                <div class="overlay-panel overlay-left" id="over-left">
-                    <h2><i class="fa-solid fa-graduation-cap"></i>لاصدار تصريح طالب متفوق</h2>
-                    <button class="ghost" id="student2">اضغط هنا</button>
-                </div>
-                <div class="overlay-panel overlay-right" id="over-right">
-                    <h2><i class="fa-brands fa-accessible-icon"></i>لاصدار تصريح ذوي الهمم </h2>
-                    <button class="ghost button" id="student1">اضغط هنا</button>
-                </div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- css-fill -->
+<link rel="stylesheet" href="/bootstrap/StyleinPage-1.css">
+<!-- google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@100;300;600&display=swap" rel="stylesheet">
+<!-- font awesome url -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<title>خدمات طلابية</title>
+<div class="container" >
+    <div class="form-container sign-up-container">
+        <form action="#">
+            <h2 class="text"><i class="fa-brands fa-accessible-icon"></i>اصدار تصريح لذوي الهمم</h2>
+        <input @bind="ID2" type="text" class="input" placeholder="الرقم الجامعي" >
+        <input @onclick="GoTo2" type="submit" class="button" value="ارسال" >
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form action="#">
+            <h2 class="text"><i class="fa-solid fa-graduation-cap"></i>اصدار تصريح طالب متفوق</h2>
+            <input @bind="ID1"  type="text" class="input" placeholder="الرقم الجامعي" >
+            <input @onclick="GoTo1" class="button" type="submit" value="ارسال" >
+        </form>
+    </div>
+<div class="overlay-container"  style=@overlayCont>
+    <div class="overlay"  style=@overlay>
+        <div class="overlay-panel overlay-left"  style=@overlayLeft>
+                <h2><i class="fa-solid fa-graduation-cap"></i>لاصدار تصريح طالب متفوق</h2>
+            <button @onclick="GoToSuperiorPage" class="ghost" >اضغط هنا</button>
+            </div>
+        <div class="overlay-panel overlay-right"  style=@overlayRight>
+                <h2><i class="fa-brands fa-accessible-icon"></i>لاصدار تصريح ذوي الهمم </h2>
+            <button @onclick="GoTopatientPage" class="ghost button" >اضغط هنا</button>
             </div>
         </div>
     </div>
-    <script src="/javascript-forPage-1.js"></script>
-</body>
-</html>
+</div>
+
+@code
+{
+    public string? ID1{ get; set; }
+    public string? ID2 { get; set; }
+
+    string? overlay;
+    string? overlayCont;
+    string? overlayLeft;
+    string? overlayRight;
+    void GoTo1()
+    {
+        Console.WriteLine("good");
+        Navm.NavigateTo($"/superior/{ID1}");
+    }
+    void GoTo2()
+    {
+        Console.WriteLine("good");
+        Navm.NavigateTo($"/paient/{ID2}");
+    }
+    void GoTopatientPage()
+    {
+        overlay = "background: linear-gradient(90deg,#005792,#00bbf0)no-repeat 0 0/cover;";
+        overlayCont="left: 0%;";
+        overlayRight ="display: none;";
+        overlayLeft = "display: flex;";
+    }
+    void GoToSuperiorPage()
+    {
+        overlay = "transition:0.6s ease-in-out;background: linear - gradient(90deg,#ff4b2b,#FF416c)no-repeat 0 0/cover;`";
+        overlayCont = "left: 50%;";
+        overlayRight = "display:flex;";
+        overlayLeft = "display: none;";
+    }
+
+}

@@ -1,0 +1,118 @@
+@keyframes linego0 {
+    100%{
+        width: 30%;
+    }
+}
+@keyframes linego1 {
+    0%{
+        width: 30%;
+    }
+    100%{
+        width: 60%;
+    }
+}
+@keyframes linego2 {
+    0%{
+        width: 60%;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes display {
+    100%{
+        opacity: 100%;
+        font-size: 1em;
+    }
+}
+@keyframes displaygreen {
+    100%{
+        background-color: rgb(16, 174, 39);
+    }
+}
+@keyframes displaynone {
+    100%{
+        opacity: 0%;
+    }
+}
+.person{
+    width: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 70px;
+    top: 100px;
+    justify-content: space-between;
+}
+.conteiner{
+    position: absolute;
+    left: calc(50% - 200px);
+    top: calc(50% - 200px);
+    border: 3px solid black;
+    width:400px;
+    height: 400px;
+}
+.step{
+    width: 395px;
+    position: absolute;
+    height: 50px;
+    background-color:   #F6cD6E;
+    z-index: 2;
+    direction: rtl;
+}
+.line{
+    position: relative;
+    background-color: white;
+    width: 0%;
+    height: 5px;
+    top: calc(50% - 2.5px);
+    animation: linego0 forwards 2s;
+}
+.step p {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    width: 30px;
+}
+.step .first {
+    top: 19%;
+    left: -30%;
+}
+.step .tow{
+    left: -60%;
+    top: -53.2%;
+}
+.step p i {
+    position: relative;
+    top: -3px;
+    font-size: 0.2em;
+    opacity: 0%;
+}
+#f2{
+    position: absolute;
+    left: 50%;
+    top: 75%;
+}
+.car{
+    opacity: 0%;
+}
+input{
+    direction: rtl;
+}
+.first input {
+    display: none;
+}
+img {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border:2px dashed black;
+}
+.submintbutton{
+    position:relative;
+    left:44%;
+}

@@ -1,0 +1,74 @@
+﻿@page "/superior/{ID}"
+@inject NavigationManager Navm
+@rendermode InteractiveServer
+
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css-fill -->
+    <link rel="stylesheet" href="/bootstrap/StyleForSuperior.css">
+    <!-- normalize -->
+    <link rel="stylesheet" href="/css/normalize-fill.css">
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@100;300;600&display=swap" rel="stylesheet">
+    <!-- font awesome url -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>sing</title>
+</head>
+    <div class="conteiner">
+        <div class="step">
+            <div class="line" style=@linechack></div>
+            <p class="first" style=@display1><i class="fa-solid fa-check icon1" style=@chack1></i></p>
+        <p class="tow" style=@display2><i class="fa-solid fa-check icon2" style=@chack2></i></p>
+        </div>
+        <div class="user-date" style=@userDate>
+            <div class="person" id="pe">
+                <input type="text" placeholder="الاسم">
+                <input type="text" placeholder="العمر">
+                <input type="text" placeholder="الهوية الوطنية">
+                <input type="text" value="@ID" placeholder="الرقم الجامعي">
+
+                
+                <button @onclick="GoToPage2"> اكمال  </button>
+            </div>
+        </div>
+        <div class="car" style=@carDate>
+            <button class="submintbutton" @onclick="submint"> ارسال</button>
+        </div>
+    </div>
+
+
+@code {
+    [Parameter]
+    public string? ID { get; set; }
+    string? linechack;
+    string? userDate;
+    string? carDate;
+    //chack icon in page1
+    string? chack1;
+    string? chack2;
+    string? display1;
+    string? display2;
+
+    //code for dasplay Image
+
+    void GoToPage2()
+    {
+        linechack = "animation: linego1 1s forwards ease-in-out;";
+        chack1 = "animation: display 3s forwards;";
+        display1 = "animation: displaygreen 2s forwards;";
+        userDate = "animation: displaynone 1s forwards;";
+        carDate = "animation: display 1s forwards;";
+    }
+    void submint()
+    {
+        linechack = "animation: linego2 1s forwards ease-in-out;";
+        chack2 = "animation: display 3s forwards;";
+        display2 = "animation: displaygreen 2s forwards;";
+        carDate = "animation: displaynone 1s forwards;";
+    }
+}
