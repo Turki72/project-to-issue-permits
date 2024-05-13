@@ -1,42 +1,10 @@
 body {
     background: linear-gradient(90deg,#0a0a0a,#3a4452);
 }
-@keyframes linego0 {
-    100% {
-        width: 30%;
-    }
-}
-
-@keyframes linego1 {
-    0% {
-        width: 30%;
-    }
-
-    100% {
-        width: 60%;
-    }
-}
-
-@keyframes linego2 {
-    0% {
-        width: 60%;
-    }
-
-    100% {
-        width: 100%;
-    }
-}
-
 @keyframes display {
     100% {
         opacity: 100%;
         font-size: 1em;
-    }
-}
-
-@keyframes displaygreen {
-    100% {
-        background-color: rgb(16, 174, 39);
     }
 }
 
@@ -60,64 +28,11 @@ body {
 .conteiner {
     position: absolute;
     left: calc(50% - 200px);
-    top: calc(50% - 275px);
+    top: calc(50% - 300px);
     border: 3px solid black;
     width: 400px;
-    height: 550px;
+    height: 600px;
     background-color:#EEE;
-}
-
-.step {
-    width:396px;
-    position: absolute;
-    height: 50px;
-    background-color: #F6cD6E;
-    z-index: 2;
-    direction: rtl;
-}
-
-.line {
-    position: relative;
-    background-color: white;
-    width: 0%;
-    height: 5px;
-    top: calc(50% - 2.5px);
-    animation: line forwards 2s;
-}
-
-.step p {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.step .first {
-    top: 21%;
-    left: -30%;
-}
-.first i{
-    position:relative;
-    top:-5px;
-}
-.step .tow {
-    left: -60%;
-    top:-53.2%;
-}
-
-.step p i {
-    position: relative;
-    top: 1px;
-    font-size: 0.2em;
-    opacity: 0%;
-}
-
-#f2 {
-    position: absolute;
-    left: 50%;
-    top: 75%;
 }
 
 .user-data {
@@ -127,21 +42,6 @@ body {
     .user-data img {
         right:0px;
     }
-
-.car {
-    position: absolute;
-    left: 10%;
-    top: 14%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 75%;
-    direction: rtl;
-    opacity: 0%;
-    display: none;
-    width: 300px;
-}
-
 input {
     direction: rtl;
 }
@@ -153,28 +53,12 @@ img {
     width: 70px;
     height: 70px;
 }
-.car img{
-    position: relative;
-    width: 70px;
-    height: 70px;
-    right: 76%;
-}
-.car .textInputCar {
-    margin: 20px 0px;
-    width: 250px;
-    position: relative;
-    left: -16px;
-}
-#img-user {
-    border: dashed grey 2px;
-}
-
 label {
     background-color: #F6cD6E;
     position: relative;
     left: 100px;
     top: 0px;
-    cursor: pointer;
+    cursor:pointer;
 }
 
 .done {
@@ -206,21 +90,6 @@ label {
         top: 14%;
     }
 
-.seral-number-item {
-    width:20px;
-}
-
-.cont-seral-number {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.f2{
-    position: relative;
-    left: -40px;
-    width: 200px;
-    top: 4px;
-}
 
 button {
     padding: 10px 25px;
@@ -239,7 +108,9 @@ button {
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    height:50px;
 }
+
 
     button::after {
         position: absolute;
