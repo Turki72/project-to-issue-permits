@@ -1,4 +1,4 @@
-﻿@page "/superior/{ID}"
+﻿@page "/superior/{IDunvircity}"
 @inject NavigationManager Navm
 @rendermode InteractiveServer
 
@@ -27,9 +27,11 @@
         </div>
         <div class="user-date" style=@userDate>
             <div class="person" id="pe">
-                <input type="text" placeholder="الاسم">
-                <input type="text" placeholder="الهوية الوطنية">
-                <input type="text" value="@ID" placeholder="الرقم الجامعي">
+                <input @bind="Name" type="text" placeholder="الاسم">
+                <input @bind="ID" type="text" placeholder="الهوية الوطنية">
+                <input @bind="IDunvircity" type="text" readonly placeholder="الرقم الجامعي">
+                <input type="text" value="@valueGPA"  placeholder=" المعدل الجامعي">
+                <input type="text" @bind="collage"  placeholder="  الكلية">
             <div class="ID imgInput">
                 <img id="img-ID" src="" for="user-ID">
                 <label for="user-ID">الهوية الوطنية </label>
@@ -54,8 +56,8 @@
             <label for="car-ID">استمارة السيارة  </label>
             <input type="file" accept="image/jpeg, image/png, image/jpg" id="car-ID">
         </div>
-        <input type="text" placeholder="نوع السيارة" class="textInputCar">
-        <input type="text" placeholder="لون السيارة" class="textInputCar">
+        <input @bind="CarModel" type="text" placeholder="نوع السيارة" class="textInputCar">
+        <input @bind="CarColor" type="text" placeholder="لون السيارة" class="textInputCar">
         <div class="cont-all-number">
             <p>لوحة السيارة بالعربي</p>
             <div class="cont-seral-number">
@@ -69,24 +71,27 @@
             </div>
             <p>لوحة السيارة بالنجليزي </p>
             <div class="cont-seral-number">
-                <input type="text" class="seral-number-item">
-                <input type="text" class="seral-number-item">
-                <input type="text" class="seral-number-item">
-                <input type="text" class="seral-number-item">
-                <input type="text" class="seral-number-item">
-                <input type="text" class="seral-number-item">
-                <input type="text" class="seral-number-item">
+                <input @bind="IDcar1" type="text" class="seral-number-item">
+                <input @bind="IDcar2" type="text" class="seral-number-item">
+                <input @bind="IDcar3" type="text" class="seral-number-item">
+                <input @bind="IDcar4" type="text" class="seral-number-item">
+                <input @bind="IDcar5" type="text" class="seral-number-item">
+                <input @bind="IDcar6" type="text" class="seral-number-item">
+                <input @bind="IDcar7" type="text" class="seral-number-item">
             </div>
         </div>
         <button class="f2" @onclick="submint"> ارسال</button>
         </div>
     </div>
         <div style=@Done class="done"><i class="fa-solid fa-check"></i><span>تم ارسال الطلب</span></div>
+        <button class="buttonGoBack" @onclick="goToPageOne"> العودة للبداية</button>
+
 
 
 @code {
     [Parameter]
-    public string? ID { get; set; }
+    public string? IDunvircity { get; set; }
+    string? valueGPA;
     string? linechack;
     string? userDate;
     string? carDate;
@@ -99,14 +104,41 @@
     string? Done;
     //code for dasplay Image
 
+    void goToPageOne()
+    {
+        Navm.NavigateTo($"/");
+    }
     void GoToPage2()
     {
-        linechack = "animation: linego1 1s forwards ease-in-out;";
-        chack1 = "animation: display 3s forwards;";
-        display1 = "animation: displaygreen 2s forwards;";
-        userDate = "animation: displaynone 1s forwards;";
-        carDate = "animation: display 1s forwards;display: block;";
+        if(ID!=null && Name != null)
+        {
+            linechack = "animation: linego1 1s forwards ease-in-out;";
+            chack1 = "animation: display 3s forwards;";
+            display1 = "animation: displaygreen 2s forwards;";
+            userDate = "animation: displaynone 1s forwards;";
+            carDate = "animation: display 1s forwards;display: block;";
+        }
+        else if (ID == null)
+        {
+            ID = "يجيب عليك تسجيل هويتك الوطنية";
+        }
+        else
+        {
+            Name = "يجيب عليك كتابة اسمك";
+        }
     }
+    string? Name;
+    string? ID;
+    string? collage;
+    string? CarModel;
+    string? CarColor;
+    string? IDcar1;
+    string? IDcar2;
+    string? IDcar3;
+    string? IDcar4;
+    string? IDcar5;
+    string? IDcar6;
+    string? IDcar7;
     void submint()
     {
         linechack = "animation: linego2 1s forwards ease-in-out;";
@@ -115,5 +147,25 @@
         carDate = "animation: displaynone 1s forwards;";
         conteiner = "animation: displaynone 0.4s forwards;";
         Done = "animation: display 3s forwards;display: block;";
+        addNewUser(IDunvircity, ID, Name, valueGPA,collage,"طالب متفوق" ,CarModel, CarColor, IDcar1, IDcar2, IDcar3, IDcar4, IDcar5, IDcar6, IDcar7, "Data.txt");
     }
+    private static void addNewUser(string IDunvircity, string ID, string Name, string GPA, string collage,string type, string carmodal, string carColor, string IDcar1, string IDcar2, string IDcar3, string IDcar4, string IDcar5, string IDcar6, string IDcar7, string data)
+    {
+        try
+        {
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@data, true))
+            {
+                file.WriteLine(IDunvircity + "," + ID + "," + Name + "," + GPA + "," + collage + "," + type + "," + carmodal + "," + carColor + "," + IDcar1 + "," + IDcar2 + "," + IDcar3 + "," + IDcar4 + "," + IDcar5 + "," + IDcar6 + "," + IDcar7);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new ApplicationException("there Are Erorr is : ", ex);
+            
+        }
+    }
+
+
+
+
 }

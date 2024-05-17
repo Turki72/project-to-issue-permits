@@ -69,3 +69,8 @@ img {
         top: calc(50% - 80px);
     }
 }
+.car-Data {
+    position: relative;
+    transform: translate(0px, -164px);
+    left: -50%;
+}

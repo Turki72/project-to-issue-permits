@@ -3,7 +3,6 @@
 @rendermode InteractiveServer
 
 
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- css-fill -->
@@ -28,6 +27,7 @@
         <form action="#">
             <h2 class="text"><i class="fa-solid fa-graduation-cap"></i>اصدار تصريح طالب متفوق</h2>
             <input @bind="ID1"  type="text" class="input" placeholder="الرقم الجامعي" >
+            <input @bind="valueGPA" type="text" class="input" placeholder="المعدل الجامعي">
             <input @onclick="GoTo1" class="button" type="submit" value="ارسال" >
         </form>
     </div>
@@ -44,7 +44,6 @@
         </div>
     </div>
 </div>
-
 @code
 {
     public string? ID1{ get; set; }
@@ -56,13 +55,11 @@
     string? overlayRight;
     void GoTo1()
     {
-        Console.WriteLine("good");
-        Navm.NavigateTo($"/superior/{ID1}");
+        chackGPA();
     }
     void GoTo2()
     {
-        Console.WriteLine("good");
-        Navm.NavigateTo($"/paient/{ID2}");
+        chacksickStudent();
     }
     void GoTopatientPage()
     {
@@ -78,5 +75,101 @@
         overlayRight = "display:flex;";
         overlayLeft = "display: none;";
     }
-
+    //save Data
+    string? valueGPA { get; set; }
+    string? searchID;
+    public string? rusalt;
+    private static string[] readData(string search, string fileData, int positipn)
+    {
+        string[] NotFound = { "Not Found" };
+        try
+        {
+            string[] Lines = System.IO.File.ReadAllLines(@fileData);
+            for (int i = 0; i < Lines.Length; i++)
+            {
+                string[] fields = Lines[i].Split(",");
+                if (serchForMatches(search, fields, positipn))
+                {
+                    return fields;
+                }
+            }
+            return NotFound;
+        }
+        catch (Exception ex)
+        {
+            return NotFound;
+            throw new ApplicationException("there Are Erorr is : ", ex);
+        }
+    }
+    private static bool serchForMatches(string search, string[] record, int position)
+    {
+        if (record[position].Equals(search))
+        {
+            return true;
+        }
+        return false;
+    }
+    void chackGPA()
+    {
+        if (valueGPA == null)
+        {
+            valueGPA = "يجب ان تكون قيمة هنا";
+        }
+        else
+        {
+            if (double.Parse(valueGPA) > 4.00 || double.Parse(valueGPA) <0)
+            {
+                valueGPA = "يجب ان تكون القيمة محصورة بين 4 و 0";
+            }
+            else if (double.Parse(valueGPA) >= 3.75)
+            {
+                string findMach = string.Join("", readData(ID1, "Data.txt", 0));
+                if (findMach == "Not Found")
+                {
+                    if (int.Parse(ID1) >= 4400000)
+                    {
+                        Navm.NavigateTo($"/superior/{ID1}");   
+                    }
+                    else
+                    {
+                        ID1 = "يجيب ان يكون الرقم الجامعي من ثمان خانات";
+                    }
+                }
+                else
+                {
+                    Navm.NavigateTo($"/permint/{ID1}");
+                }
+            }
+            else
+            {
+                valueGPA = "لم تصل الي الحد المطلوب 3.75";
+            }
+        }
+    }
+    void chacksickStudent()
+    {
+        if (valueGPA == null)
+        {
+            valueGPA = "يجب ان تكون قيمة هنا";
+        }
+        else
+        {
+            string findMach = string.Join("", readData(ID2, "Data.txt", 0));
+            if (findMach == "Not Found")
+            {
+                if (int.Parse(ID2) >= 4400000)
+                {
+                    Navm.NavigateTo($"/paient/{ID2}");
+                }
+                else
+                {
+                    ID2 = "يجيب ان يكون الرقم الجامعي من ثمان خانات";
+                }
+            }
+            else
+            {
+                Navm.NavigateTo($"/permint/{ID2}");
+            }
+        }
+    }
 }
